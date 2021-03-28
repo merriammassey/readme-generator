@@ -1,52 +1,64 @@
-// TODO: Include packages needed for this application
 const inquirer = require('inquirer');
+//const questions = require('./utils/questions');
+const generateMarkdown = require('./utils/generateMarkdown');
+//mock data
+const data = {
+    title: 'My Title',
+    description: 'Lorem ipsum',
+    installation: 'to install, you must',
+    usage: 'use this for...',
+    contribution: 'to contribute...',
+    test: 'to test...',
+    license: 'MIT 2.0',
+    github: 'merriammassey',
+    email: 'merriammassey@gmail.com'
+  }
+  
+const markdown = generateMarkdown(data);
 
-// TODO: Create an array of questions for user input
-const questions = [];
-/*
-THEN a high-quality, professional README.md is generated 
-with the title of my project 
-and sections entitled Description, Table of Contents, Installation, Usage, License, Contributing, Tests, and Questions
-
-WHEN I enter my project title
-THEN this is displayed as the title of the README
-WHEN I enter a description, installation instructions, usage information, contribution guidelines, and test instructions
-THEN this information is added to the sections of the README entitled Description, Installation, Usage, Contributing, and Tests
-
-/*
-WHEN I choose a license for my application from a list of options
-THEN a badge for that license is added near the top of the README 
-and a notice is added to the section of the README entitled License that explains which license the application is covered under
-*/
- 
-/*
-WHEN I enter my GitHub username
-THEN this is added to the section of the README entitled Questions, with a link to my GitHub profile
-
-WHEN I enter my email address
-THEN this is added to the section of the README entitled Questions, with instructions on how to reach me with additional questions
-
-WHEN I click on the links in the Table of Contents
-THEN I am taken to the corresponding section of the README
-*/
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+const writeToFile = (fileName, data)=> {
+    return new Promise((resolve, reject) => {
+        fs.writeFile('./output/'+ fileName, data, err => {
+          if (err) {
+            reject(err);
+            return;
+          }
+    
+          resolve({
+            ok: true,
+            message: 'File created!'
+          });
+        });
+      });
+    };
 
 // TODO: Create a function to initialize app
-function init() {}
+function init() {
+    //collect info
+    //return inquirer.prompt(questions)
+    return data
+    //render license info
+    .then(renderLicenseSection)
+    //return a string
+    .then(data => {
+        return generateMarkdown(data);
+    })
+    //make a file using the string
+    .then(markdown => {
+        return writeToFile(markdown);
+    })
+    //alert of success or failure
+    .then(writeToFileResponse => {
+        console.log(writeToFileResponse);
+      })
+    .catch(err => {
+        console.log(err);
+      });
+ }
 
 // Function call to initialize app
 init();
 
-//mock data
-const mockData = {
-    title: 'My Title',
-    description: 'Lorem ipsum',
-    installationInstructions: 'to install, you must',
-    usageInfo: 'use this for...',
-    contributionGuidelines: 'to contribute...',
-    testInstructions: 'to test...'
-  }
-  
-  const pageHTML = generatePage(mockData);
+
