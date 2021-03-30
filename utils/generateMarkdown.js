@@ -1,5 +1,18 @@
 // TODO: Create a function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
+/*
+const data = {
+  title: 'My Title',
+  description: 'Lorem ipsum',
+  installation: 'to install, you must',
+  usage: 'use this for...',
+  contribution: 'to contribute...',
+  test: 'to test...',
+  license: 'MIT',
+  github: 'merriammassey',
+  email: 'merriammassey@gmail.com'
+}
+*/
 const renderLicenseBadge = data => {
   if (data.license === "none") {
     return '';
@@ -18,26 +31,21 @@ const renderLicenseBadge = data => {
 // TODO: Create a function that returns the license link
 // If there is no license, return an empty string
 const renderLicenseLink = data => {
-  if (data.license === "none") {
+  if (data.license === 'none') {
     return '';
   }
   if (data.license === 'Apache 2.0') {
-    return "![License](https://opensource.org/licenses/Apache-2.0)"
+    return "[License](https://opensource.org/licenses/Apache-2.0)"
   }
   if (data.license === 'MIT') {
-    return "![License: MIT](https://opensource.org/licenses/MIT)"
+    return "[License: MIT](https://opensource.org/licenses/MIT)"
   }
   if (data.license === 'GNU 3.0') {
-    return "![License: GPL v3](https://www.gnu.org/licenses/gpl-3.0)"
+    return "[License: GPL v3](https://www.gnu.org/licenses/gpl-3.0)"
   }
 }
 
-// TODO: Create a function that returns the license section of README
-// If there is no license, return an empty string
-const renderLicenseSection = () => {
-  return renderLicenseBadge()
-  .then(renderLicenseLink);
-}
+
 
 // TODO: Create a function to generate markdown for README
 const generateMarkdown = data => {
@@ -52,9 +60,9 @@ ${data.description}
 * [Installation](#installation)
 * [Usage](#usage)
 * [License](#license)
-* [Contributions] (#contributions)
-* [Tests] (#tests)
-* [Questions] (#questions)
+* [Contributions](#contributions)
+* [Tests](#tests)
+* [Questions](#questions)
 
 ## Installation
 
@@ -66,6 +74,8 @@ ${data.usage}
 
 ## License
 
+${renderLicenseBadge(data)}
+${renderLicenseLink(data)}
 
 ## Contributions
 
@@ -85,4 +95,4 @@ GitHub [my GitHub profile](https://github.com/${data.github}).
 `;
 }
 
-module.exports = generateMarkdown;
+module.exports = { renderLicenseBadge, renderLicenseLink, generateMarkdown };

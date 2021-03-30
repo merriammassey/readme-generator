@@ -1,26 +1,27 @@
 const inquirer = require('inquirer');
+const fs = require('fs');
 //const questions = require('./utils/questions');
-const generateMarkdown = require('./utils/generateMarkdown');
-//mock data
-const data = {
+const { renderLicenseBadge, renderLicenseLink, generateMarkdown } = require('./utils/generateMarkdown');
+
+const mockData = {
     title: 'My Title',
     description: 'Lorem ipsum',
     installation: 'to install, you must',
     usage: 'use this for...',
-    contribution: 'to contribute...',
-    test: 'to test...',
-    license: 'MIT 2.0',
+    contributions: 'to contribute...',
+    tests: 'to test...',
+    license: 'MIT',
     github: 'merriammassey',
     email: 'merriammassey@gmail.com'
   }
-  
-const markdown = generateMarkdown(data);
+
+//const markdown = generateMarkdown(data);
 
 
 // TODO: Create a function to write README file
 const writeToFile = (fileName, data)=> {
     return new Promise((resolve, reject) => {
-        fs.writeFile('./output/'+ fileName, data, err => {
+        fs.writeFile('./output/'+ fileName, generateMarkdown(data), err => {
           if (err) {
             reject(err);
             return;
@@ -35,20 +36,21 @@ const writeToFile = (fileName, data)=> {
     };
 
 // TODO: Create a function to initialize app
-function init() {
+const init = data => {
     //collect info
     //return inquirer.prompt(questions)
-    return data
+    //return data
     //render license info
-    .then(renderLicenseSection)
+    //.then(data => {
+    //    return renderLicenseBadge(data)
+    //}
+    console.log(data);
+    //renderLicenseBadge(data);
+    //renderLicenseLink(data);
     //return a string
-    .then(data => {
-        return generateMarkdown(data);
-    })
+    //generateMarkdown(data)
     //make a file using the string
-    .then(markdown => {
-        return writeToFile(markdown);
-    })
+    writeToFile('readme.md', data)
     //alert of success or failure
     .then(writeToFileResponse => {
         console.log(writeToFileResponse);
@@ -59,6 +61,6 @@ function init() {
  }
 
 // Function call to initialize app
-init();
+init(mockData);
 
 
