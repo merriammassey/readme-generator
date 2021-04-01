@@ -52,24 +52,37 @@ const questions = [
         }
     },
     {
-        type: 'input',
-        name: 'contribution',
-        message: 'Describe how to contribute to the project. (Required)',
-        validate: contributionInput => {
-            if (contributionInput) {
+    type: 'input',
+        name: 'screenshot',
+        message: 'Please open a new GitHub issue, paste a screenshot, and copy and paste the markdown here. (Required)',
+        validate: screenshotInput => {
+            if (screenshotInput) {
                 return true;
             }else {
-                console.log('Please enter your usage description.');
+                console.log('Please enter a url of the image.');
                 return false;
             }
         }
     },
     {
+    type: 'input',
+    name: 'contributions',
+    message: 'Describe how to contribute to the project. (Required)',
+    validate: contributionsInput => {
+        if (contributionsInput) {
+            return true;
+        }else {
+            console.log('Please enter your usage description.');
+            return false;
+        }
+    }
+},
+    {
         type: 'input',
-        name: 'test',
+        name: 'tests',
         message: 'Describe how to run the project tests. (Required)',
-        validate: testInput => {
-            if (testInput) {
+        validate: testsInput => {
+            if (testsInput) {
                 return true;
             }else {
                 console.log('Please enter your test instructions.');
@@ -78,7 +91,7 @@ const questions = [
         }
     },
     {
-        type: 'checkbox',
+        type: 'list',
         name: 'license',
         message: 'Choose the approriate license for your project',
         choices: ['Apache 2.0', 'MIT', 'GNU 3.0', 'none']
@@ -112,3 +125,4 @@ const questions = [
 
 ]
 
+module.exports = questions;

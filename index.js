@@ -1,8 +1,8 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-//const questions = require('./utils/questions');
+const questions = require('./utils/questions');
 const { renderLicenseBadge, renderLicenseLink, generateMarkdown } = require('./utils/generateMarkdown');
-
+/*
 const mockData = {
     title: 'My Title',
     description: 'Lorem ipsum',
@@ -14,7 +14,7 @@ const mockData = {
     github: 'merriammassey',
     email: 'merriammassey@gmail.com'
   }
-
+*/
 //const markdown = generateMarkdown(data);
 
 
@@ -26,7 +26,6 @@ const writeToFile = (fileName, data)=> {
             reject(err);
             return;
           }
-    
           resolve({
             ok: true,
             message: 'File created!'
@@ -36,21 +35,13 @@ const writeToFile = (fileName, data)=> {
     };
 
 // TODO: Create a function to initialize app
-const init = data => {
+const init = () => {
     //collect info
-    //return inquirer.prompt(questions)
-    //return data
-    //render license info
-    //.then(data => {
-    //    return renderLicenseBadge(data)
-    //}
-    console.log(data);
-    //renderLicenseBadge(data);
-    //renderLicenseLink(data);
-    //return a string
-    //generateMarkdown(data)
-    //make a file using the string
-    writeToFile('readme.md', data)
+    inquirer.prompt(questions)
+    //return object
+    .then(data => {
+        console.log(data);
+        writeToFile('readme.md', data)
     //alert of success or failure
     .then(writeToFileResponse => {
         console.log(writeToFileResponse);
@@ -58,9 +49,22 @@ const init = data => {
     .catch(err => {
         console.log(err);
       });
+    });
+    //return data
+    //render license info
+    //.then(data => {
+    //    return renderLicenseBadge(data)
+    //}
+    //console.log(data);
+    //renderLicenseBadge(data);
+    //renderLicenseLink(data);
+    //return a string
+    //generateMarkdown(data)
+    //make a file using the string
+    
  }
 
 // Function call to initialize app
-init(mockData);
+init();
 
 

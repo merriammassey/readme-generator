@@ -14,6 +14,7 @@ const data = {
 }
 */
 const renderLicenseBadge = data => {
+  console.log(data.license);
   if (data.license === "none") {
     return '';
   }
@@ -71,6 +72,10 @@ ${data.installation}
 ## Usage
 
 ${data.usage}
+
+## Screenshot
+
+${data.screenshot}
 
 ## License
 
