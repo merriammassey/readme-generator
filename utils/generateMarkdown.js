@@ -1,18 +1,4 @@
-// TODO: Create a function that returns a license badge based on which license is passed in
-// If there is no license, return an empty string
-/*
-const data = {
-  title: 'My Title',
-  description: 'Lorem ipsum',
-  installation: 'to install, you must',
-  usage: 'use this for...',
-  contribution: 'to contribute...',
-  test: 'to test...',
-  license: 'MIT',
-  github: 'merriammassey',
-  email: 'merriammassey@gmail.com'
-}
-*/
+
 const renderLicenseBadge = data => {
   console.log(data.license);
   if (data.license === "none") {
@@ -29,8 +15,6 @@ const renderLicenseBadge = data => {
   }
 }
 
-// TODO: Create a function that returns the license link
-// If there is no license, return an empty string
 const renderLicenseLink = data => {
   if (data.license === 'none') {
     return '';
@@ -46,9 +30,6 @@ const renderLicenseLink = data => {
   }
 }
 
-
-
-// TODO: Create a function to generate markdown for README
 const generateMarkdown = data => {
   return `# ${data.title}
 
@@ -96,7 +77,7 @@ Reach out with questions.
 
 Email ${data.email}
 
-GitHub [my GitHub profile](https://github.com/${data.github}).
+GitHub [my GitHub profile](https://github.com/${data.github})
 `;
 }
 
